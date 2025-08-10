@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Unique Animated Download Buttons</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+        }
+        
+        .button-group {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        h2 {
+            color: #444;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        /* 1. Liquid Bubble Button */
+        .liquid-btn {
+            position: relative;
+            padding: 18px 45px;
+            text-decoration: none;
+            text-transform: uppercase;
+            width: 200px;
+            overflow: hidden;
+            border-radius: 40px;
+            text-align: center;
+        }
+        
+        .liquid-btn span {
+            position: relative;
+            color: #fff;
+            font-size: 18px;
+            letter-spacing: 3px;
+            z-index: 1;
+        }
+        
+        .liquid-btn .liquid {
+            position: absolute;
+            top: -80px;
+            left: 0;
+            width: 200px;
+            height: 200px;
+            background: #4973ff;
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, .5);
+            transition: 0.5s;
+        }
+        
+        .liquid-btn .liquid::after,
+        .liquid-btn .liquid::before {
+            content: '';
+            width: 200%;
+            height: 200%;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -75%);
+            background: #000;
+        }
+        
+        .liquid-btn .liquid::before {
+            border-radius: 45%;
+            background: rgba(20, 20, 20, 1);
+            animation: animate 5s linear infinite;
+        }
+        
+        .liquid-btn .liquid::after {
+            border-radius: 40%;
+            background: rgba(20, 20, 20, 0.5);
+            animation: animate 10s linear infinite;
+        }
+        
+        .liquid-btn:hover .liquid {
+            top: -120px;
+        }
+        
+        /* 2. Neon Glitch Button */
+        .neon-btn {
+            position: relative;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            width: 200px;
+            height: 60px;
+            color: #0fa;
+            font-size: 18px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            overflow: hidden;
+        }
+        
+        .neon-btn .text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+        }
+        
+        .neon-btn .text::before {
+            content: attr(data-text);
+            position: absolute;
+            left: -2px;
+            text-shadow: 2px 0 #f0f;
+            background: transparent;
+            overflow: hidden;
+            clip: rect(0, 900px, 0, 0);
+            animation: noise-anim-1 2s infinite linear alternate-reverse;
+        }
+        
+        .neon-btn .text::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 2px;
+            text-shadow: -2px 0 #0ff;
+            background: transparent;
+            overflow: hidden;
+            clip: rect(0, 900px, 0, 0);
+            animation: noise-anim-2 3s infinite linear alternate-reverse;
+        }
+        
+        .neon-btn .line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #0fa;
+            transform-origin: left;
+            transform: scaleX(0);
+            transition: transform 0.5s;
+        }
+        
+        .neon-btn:hover .line {
+            transform: scaleX(1);
+        }
+        
+        /* 3. Particle Explosion Button */
+        .particle-btn {
+            position: relative;
+            background: #ff3c41;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        
+        .particle-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        
+        .particle-btn:active {
+            transform: translateY(1px);
+        }
+        
+        .particle-btn .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, #fff 10%, transparent 10%);
+            background-size: 10px 10px;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0;
+            transition: background-size 0.8s, opacity 0.6s;
+        }
+        
+        .particle-btn:active .particles {
+            background-size: 1000px 1000px;
+            opacity: 1;
+            transition: background-size 0.8s, opacity 0.6s;
+        }
+        
+        /* 4. Holographic Button */
+        .holographic-btn {
+            position: relative;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #ff00cc, #3333ff, #00ccff);
+            background-size: 200% 200%;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            overflow: hidden;
+            z-index: 1;
+            animation: gradientShift 3s ease infinite;
+        }
+        
+        .holographic-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(45deg);
+            z-index: -1;
+            transition: all 0.5s;
+        }
+        
+        .holographic-btn:hover::before {
+            left: 100%;
+            top: 100%;
+        }
+        
+        /* 5. Magnetic Button */
+        .magnetic-btn {
+            position: relative;
+            padding: 15px 30px;
+            background: #6e48aa;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .magnetic-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .magnetic-btn .circle {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            pointer-events: none;
+            animation: scaleIn 0.3s ease-out;
+        }
+        
+        @keyframes scaleIn {
+            from { transform: translate(-50%, -50%) scale(0); }
+            to { transform: translate(-50%, -50%) scale(1); }
+        }
+        
+        /* 6. Sliding Layers Button */
+        .sliding-btn {
+            position: relative;
+            padding: 15px 30px;
+            background: #2b5876;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .sliding-btn::before,
+        .sliding-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #4e4376;
+            z-index: -1;
+            transition: transform 0.5s ease;
+        }
+        
+        .sliding-btn::before {
+            background: #2b5876;
+            transform: translateX(-100%);
+        }
+        
+        .sliding-btn:hover::before {
+            transform: translateX(0);
+        }
+        
+        .sliding-btn:hover::after {
+            transform: translateX(100%);
+        }
+        
+        /* 7. 3D Press Button */
+        .press-btn {
+            position: relative;
+            padding: 15px 30px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 5px 0 #ee5253;
+        }
+        
+        .press-btn:hover {
+            transform: translateY(2px);
+            box-shadow: 0 3px 0 #ee5253;
+        }
+        
+        .press-btn:active {
+            transform: translateY(5px);
+            box-shadow: 0 0 0 #ee5253;
+        }
+        
+        /* 8. Gradient Border Button */
+        .border-btn {
+            position: relative;
+            padding: 15px 30px;
+            background: white;
+            color: #333;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 1;
+        }
+        
+        .border-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4, #a18cd1);
+            background-size: 300% 300%;
+            border-radius: 5px;
+            padding: 2px;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: gradientBorder 4s ease infinite;
+        }
+        
+        .border-btn:hover::before {
+            animation: gradientBorder 2s ease infinite;
+        }
+        
+        /* 9. Text Fill Button */
+        .fill-btn {
+            position: relative;
+            padding: 15px 30px;
+            background: transparent;
+            color: #333;
+            border: 2px solid #333;
+            font-size: 16px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: color 0.3s;
+        }
+        
+        .fill-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #333;
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        
+        .fill-btn:hover {
+            color: white;
+        }
+        
+        .fill-btn:hover::before {
+            transform: scaleX(1);
+        }
+        
+        /* 10. Floating Shadow Button */
+        .float-btn {
+            position: relative;
+            padding: 15px 30px;
+            background: #5f27cd;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .float-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 20px rgba(95, 39, 205, 0.4);
+        }
+        
+        /* Animations */
+        @keyframes animate {
+            0% { transform: translate(-50%, -75%) rotate(0deg); }
+            100% { transform: translate(-50%, -75%) rotate(360deg); }
+        }
+        
+        @keyframes noise-anim-1 {
+            0% { clip: rect(61px, 9999px, 52px, 0); }
+            20% { clip: rect(33px, 9999px, 44px, 0); }
+            40% { clip: rect(121px, 9999px, 115px, 0); }
+            60% { clip: rect(144px, 9999px, 162px, 0); }
+            80% { clip: rect(62px, 9999px, 180px, 0); }
+            100% { clip: rect(143px, 9999px, 17px, 0); }
+        }
+        
+        @keyframes noise-anim-2 {
+            0% { clip: rect(26px, 9999px, 33px, 0); }
+            20% { clip: rect(25px, 9999px, 145px, 0); }
+            40% { clip: rect(147px, 9999px, 99px, 0); }
+            60% { clip: rect(98px, 9999px, 54px, 0); }
+            80% { clip: rect(172px, 9999px, 34px, 0); }
+            100% { clip: rect(138px, 9999px, 134px, 0); }
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes gradientBorder {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body>
+    <h1>10 Unique Animated Download Buttons</h1>
+    
+    <div class="button-container">
+        <!-- 1. Liquid Bubble Button -->
+        <div class="button-group">
+            <h2>1. Liquid Bubble Effect</h2>
+            <a href="#" class="liquid-btn" onclick="downloadFile()">
+                <span>Download</span>
+                <div class="liquid"></div>
+            </a>
+        </div>
+        
+        <!-- 2. Neon Glitch Button -->
+        <div class="button-group">
+            <h2>2. Neon Glitch Effect</h2>
+            <button class="neon-btn" onclick="downloadFile()">
+                <span class="text" data-text="Download">Download</span>
+                <span class="line"></span>
+            </button>
+        </div>
+        
+        <!-- 3. Particle Explosion Button -->
+        <div class="button-group">
+            <h2>3. Particle Explosion</h2>
+            <button class="particle-btn" onclick="downloadFile()">
+                Download
+                <div class="particles"></div>
+            </button>
+        </div>
+        
+        <!-- 4. Holographic Button -->
+        <div class="button-group">
+            <h2>4. Holographic Glow</h2>
+            <button class="holographic-btn" onclick="downloadFile()">
+                Download
+            </button>
+        </div>
+        
+        <!-- 5. Magnetic Button -->
+        <div class="button-group">
+            <h2>5. Magnetic Effect</h2>
+            <button class="magnetic-btn" onclick="downloadFile(event)">
+                Download
+            </button>
+        </div>
+        
+        <!-- 6. Sliding Layers Button -->
+        <div class="button-group">
+            <h2>6. Sliding Layers</h2>
+            <button class="sliding-btn" onclick="downloadFile()">
+                Download
+            </button>
+        </div>
+        
+        <!-- 7. 3D Press Button -->
+        <div class="button-group">
+            <h2>7. 3D Press Effect</h2>
+            <button class="press-btn" onclick="downloadFile()">
+                Download
+            </button>
+        </div>
+        
+        <!-- 8. Gradient Border Button -->
+        <div class="button-group">
+            <h2>8. Gradient Border</h2>
+            <button class="border-btn" onclick="downloadFile()">
+                Download
+            </button>
+        </div>
+        
+        <!-- 9. Text Fill Button -->
+        <div class="button-group">
+            <h2>9. Text Fill Animation</h2>
+            <button class="fill-btn" onclick="downloadFile()">
+                Download
+            </button>
+        </div>
+        
+        <!-- 10. Floating Shadow Button -->
+        <div class="button-group">
+            <h2>10. Floating Shadow</h2>
+            <button class="float-btn" onclick="downloadFile()">
+                Download
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function downloadFile(e) {
+            // Replace this with your actual download functionality
+            alert("Download initiated! (This is a demo - replace with actual download code)");
+            
+            // Example of actual download code you might use:
+            // window.location.href = 'your-file-path.pdf';
+            // or create a temporary anchor tag:
+            /*
+            const link = document.createElement('a');
+            link.href = 'your-file-path.pdf';
+            link.download = 'filename.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            */
+            
+            // For magnetic button effect
+            if (e) {
+                const btn = e.currentTarget;
+                const x = e.clientX - btn.getBoundingClientRect().left;
+                const y = e.clientY - btn.getBoundingClientRect().top;
+                
+                const circle = document.createElement("span");
+                circle.classList.add("circle");
+                circle.style.left = x + "px";
+                circle.style.top = y + "px";
+                
+                btn.appendChild(circle);
+                
+                setTimeout(() => {
+                    circle.remove();
+                }, 500);
+            }
+        }
+        
+        // Add magnetic effect to all buttons
+        document.querySelectorAll('.magnetic-btn').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                btn.style.setProperty('--x', `${x}px`);
+                btn.style.setProperty('--y', `${y}px`);
+            });
+        });
+    </script>
+</body>
+</html>
